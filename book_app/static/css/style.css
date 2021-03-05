@@ -1,0 +1,25 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+footer.page-footer {
+    padding-top: 3px;
+    text-align: right;
+    height: 35px;
+}
+
+nav .badge {
+    position: relative;
+    top: 20px;
+    right: 20px;
+}
+
+h1 {
+    font-size: 20px;
+}

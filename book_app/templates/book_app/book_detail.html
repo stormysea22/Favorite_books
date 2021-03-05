@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load custom_tags %}
+
+<h1>Task Details</h1>
+
+<div class="row1">
+    <div class="col">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ book.title }}</span>
+                <p>Description: {{ book.description }}</p>
+                <p>Added By: {{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }}</p>
+                <p>Added On: {{ book.created_at }}</p>
+                <p>Last Updated: {{ book.updated_at }}</p>
+                <ul> Users Who Liked this Book:
+                    {% for user in book.users_who_like.all %}
+                    <li>{{ user.first_name }} {{ user.last_name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="card-action">
+                    {% if user in book.users_who_like.all %}
+                        <a href="{% url 'un_favorite' book.id %}"><i class="material-icons">star</i> Un-Favorite</a>
+                    {% else %}
+                        <a href="{% url 'make_favorite' book.id %}"><i class="material-icons">star_border</i> Make Favorite</a>
+                    {% endif %}
+                {% if book.uploaded_by.id == request.session.user_id %}
+                    <a href="{% url 'books_edit' book.id %}">Edit</a>
+                    <a href="{% url 'books_delete' book.id %}">Delete</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

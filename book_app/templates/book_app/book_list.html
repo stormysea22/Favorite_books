@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<h1>Entry List</h1>
 
+{% for book in book_list %}
+    <a href="{% url 'books_detail' book.id %}">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ book.title }}</span>
+                <p>Description: {{ book.description }}</p>
+            </div>
+        </div>
+    </a>
+{% endfor %}
+<a href="{% url 'books_create' %}" class="btn">Create Book</a>
 
 {% endblock %}
